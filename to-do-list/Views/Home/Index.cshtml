@@ -1,0 +1,103 @@
+﻿@using to_do_list.Models.Entity
+@model List<Tbl_Tasks>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .bg-gray {
+        background-color: #f4f6f7;
+    }
+</style>
+
+<section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+
+                <div class="card">
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="float-end">
+                                <a href="/Login/Logout" class="btn mt-2" title="Logout">
+                                    <i class="fa-solid fa-arrow-right-from-bracket text-dark fs-3"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body p-5">
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="float-start mb-3">
+                                    <h1 class="h5">My To-Do List</h1>
+                                </div>
+                                <div class="float-end mb-3">
+                                    <p>@DateTime.Now.ToString("dd MMMM yyyy")</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <form class="d-flex justify-content-center align-items-center mb-4" method="post">
+                            <div class="input-group my-3">
+                                <div class="form-floating flex-fill">
+                                    <input name="NAME" id="name" type="text" class="form-control required" placeholder="Task name.." required />
+                                    <label for="name" class="form-label">Task Name...</label>
+                                </div>
+                                <div class="form-floating flex-fill">
+                                    <input name="DATEOFTASK" id="dateOfTask" type="text" class="form-control required" size="1" placeholder="Exp: 1.09.2022, 18.12.2023..." required />
+                                    <label for="dateOfTask" class="form-label">Date of Task (Exp: 1.09.2022, 18.12.2023)</label>
+                                </div>
+                                <button type="submit" class="btn btn-info ms-1">Add</button>
+                            </div>
+                        </form>
+
+                        <div>
+                            <ul class="nav nav-tabs mb-4 pb-2">
+                                <li class="nav-item">
+                                    <a href="/Home/Index" class="nav-link active">Today's tasks</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Home/Completed" class="nav-link">Completed</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active">
+                                <ol class="list-group list-group-numbered mb-0">
+                                    @foreach (var x in Model)
+                                    {
+                                        <li class="list-group-item d-flex align-items-center border-0 mb-2 bg-gray rounded">
+                                            <span class="ms-1 me-auto"> @x.NAME </span>
+                                            <div class="btn-group g-2">
+                                                <a href="/Home/CompleteTask/@x.ID" class="btn" title="Complete Task">
+                                                    <i class="fa-solid fa-check text-success fs-5"></i>
+                                                </a>
+                                                <a href="/Home/DeleteTask/@x.ID" class="btn" title="Delete Task">
+                                                    <i class="fa-solid fa-xmark text-danger fs-5"></i>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    }
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <footer class="text-center">
+            <p class="text-white">
+                This project created and designed by <a class="text-decoration-none text-white fw-light" href="https://ahmetyazbulursun.com" target="_blank" rel="noreferrer noopener"<>Ahmet Hakan Eroglu</a>.
+            </p>
+        </footer>
+
+    </div>
+</section>
